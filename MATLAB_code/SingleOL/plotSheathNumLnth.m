@@ -1,4 +1,4 @@
-function [ALL, pNum, numstats, pLnth, lnthstats] = plotSheathNumLnth(ALL)
+function [ALL, stats] = plotSheathNumLnth(ALL)
 ALL.stats.meanSheathNum = [];
 cond = {'ctrl','cupr'};
 for c = 1:2
@@ -40,7 +40,7 @@ tp(1:ctrlan) = {'bsln'};
 tp(ctrlan+1:ctrlan*2) = {'last'};
 tp(ctrlan*2+1:(ctrlan*2+1)+cupran) = {'bsln'};
 tp((ctrlan*2+1)+cupran:end) = {'last'};
-[pNum,~,numstats] = anovan(data,{cond,tp},'varnames',{'cond','tp'},'model','interaction','display','off');
+[stats.pNum,stats.numtbl,stats.numstats] = anovan(data,{cond,tp},'varnames',{'cond','tp'},'model','interaction','display','off');
 % multcompare(stats,'Dimension',[1 2]);
 
 % statistics for lengths of sheaths
@@ -55,8 +55,8 @@ tp(1:ctrlan) = {'bsln'};
 tp(ctrlan+1:ctrlan*2) = {'last'};
 tp(ctrlan*2+1:(ctrlan*2+1)+cupran) = {'bsln'};
 tp((ctrlan*2+1)+cupran:end) = {'last'};
-[pLnth,~,lnthstats] = anovan(data,{cond,tp},'varnames',{'cond','tp'},'model','interaction','display','on');
-multcompare(lnthstats,'Dimension',[1 2]);
+[stats.pLnth,stats.lnthtbl,stats.lnthstats] = anovan(data,{cond,tp},'varnames',{'cond','tp'},'model','interaction','display','on');
+stats.multcomp = multcompare(stats.lnthstats,'Dimension',[1 2],'CType','tukey-kramer');
 
 % get means and sems for numbers and lengths to plot
 ALL.stats.meanSheathNumBsln = [mean(ALL.stats.BaseNumSheaths.ctrl) , calcSEM(ALL.stats.BaseNumSheaths.ctrl')];
@@ -65,7 +65,7 @@ ALL.stats.meanSheathLnthBsln = [mean(ALL.stats.BaseLnthSheaths.ctrl) , calcSEM(A
 ALL.stats.meanSheathLnthBsln(2,:) = [mean(ALL.stats.BaseLnthSheaths.cupr) , calcSEM(ALL.stats.BaseLnthSheaths.cupr')];
 
 ALL.stats.meanSheathNumLast = [mean(ALL.stats.LastNumSheaths.ctrl) , calcSEM(ALL.stats.LastNumSheaths.ctrl')];
-ALL.stats.meanSheathNumLast(2,:) = [mean(ALL.stats.LastNumSheaths.cupr) , calcSEM(ALL.stats.LastNumSheaths.cupr')];
+ALL.stats.meanSheathNumLast(2,:) = [mean(ALL.stats.LastNumSheaths.cupr,'omitnan') , calcSEM(ALL.stats.LastNumSheaths.cupr')];
 ALL.stats.meanSheathLnthLast = [mean(ALL.stats.LastLnthSheaths.ctrl) , calcSEM(ALL.stats.LastLnthSheaths.ctrl')];
 ALL.stats.meanSheathLnthLast(2,:) = [mean(ALL.stats.LastLnthSheaths.cupr,'omitnan') , calcSEM(ALL.stats.LastLnthSheaths.cupr')];
 

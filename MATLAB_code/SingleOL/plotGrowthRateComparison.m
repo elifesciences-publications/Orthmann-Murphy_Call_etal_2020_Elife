@@ -1,16 +1,17 @@
+function [ctrlGrowthStats, ctrlGrowthTbl, ctrlMultComp, cuprGrowthStats, cuprGrowthTbl, cuprMultComp] = plotGrowthRateComparison(ALL)
 dcupr = diff(ALL.stats.allCummGrowth.cupr,[],2);
 dcupr = abs(dcupr);
 ycupr = mean(dcupr,'omitnan');
 semcupr = calcSEM(dcupr);
-[~,~,stats] = anovan(dcupr(:),[ones(10,1);ones(10,1).*2;ones(10,1).*3;ones(10,1).*4;ones(10,1).*5;ones(10,1).*6;ones(10,1).*7]);
-multcompare(stats,'CType','bonferroni');
+[~,cuprGrowthTbl,cuprGrowthStats] = anovan(dcupr(:),[ones(10,1);ones(10,1).*2;ones(10,1).*3;ones(10,1).*4;ones(10,1).*5;ones(10,1).*6;ones(10,1).*7]);
+cuprMultComp = multcompare(cuprGrowthStats,'CType','bonferroni');
 
 dctrl = diff(ALL.stats.allCummGrowth.ctrl,[],2);
 dctrl = abs(dctrl);
 yctrl = mean(dctrl,'omitnan');
 semctrl = calcSEM(dctrl);
-[~,~,stats] = anovan(dctrl(:),[ones(10,1);ones(10,1).*2;ones(10,1).*3;ones(10,1).*4;ones(10,1).*5;ones(10,1).*6;ones(10,1).*7]);
-multcompare(stats,'CType','bonferroni');
+[~,ctrlGrowthTbl,ctrlGrowthStats] = anovan(dctrl(:),[ones(10,1);ones(10,1).*2;ones(10,1).*3;ones(10,1).*4;ones(10,1).*5;ones(10,1).*6;ones(10,1).*7]);
+ctrlMultComp = multcompare(ctrlGrowthStats,'CType','bonferroni');
 
 [c1, c2] = getFigColors;
 figure

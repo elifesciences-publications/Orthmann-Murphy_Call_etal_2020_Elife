@@ -18,10 +18,10 @@ else
     slash = '/';
 end
 [~,name] = fileparts(pwd);
-if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
+if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
     cd(['..' slash]);
     [~,name] = fileparts(pwd);
-    if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
+    if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
         error(['Change current folder to ' name])
     end
 end
