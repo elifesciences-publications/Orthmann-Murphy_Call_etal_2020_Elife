@@ -1,6 +1,6 @@
 function [terrPs,terrStats] = plotTerritoryOverlap_oneCond(in1,figColorNum)
-[c1,c2,c3,c4] = getFigColors;
-colors = [c1;c2;c3;c4];
+[c1,c2] = getFigColors;
+colors = [c1;c2];
 data=in1;
 color=colors(figColorNum,:);
 an = fieldnames(data);

@@ -2,17 +2,13 @@
 % calc euclidian distance from origin (all points are now vectors), find furthest point from soma center
 % 
 % (x/a)2 + (y/b)2 + (z/c)2 = 1
-% (The ellipsoid passes through points (a, 0, 0), (0, b, 0) and (0, 0, c).) 
-% "Just plug in values for (x, y, z) for your point and if it's less than
-% 1, the point is inside the ellipsoid."
+% if < 1, the point is inside the ellipsoid
 %
-function [optRadxy, optRadz, coords] = territoryAlgorithm(index,xmlstruct,name)
+function [optRadxy, optRadz, coords] = territoryAlgorithm(index,xmlstruct)
 coords=[]; 
 for i = 1:length(index)
     coords = [coords; xmlstruct.paths(index(i)).points.smoothed];
 end
-% coords(:,3) = coords(:,3).*-1;
-% c = getCenter(name);
 c = mean(coords);
 coords = coords - c;
 ubx = max(coords(:,1));

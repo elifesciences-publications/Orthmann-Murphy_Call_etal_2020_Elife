@@ -1,4 +1,4 @@
-function [avglost3,semlost3,avglost1,semlost1] = plotWKrates_cuprL1vL3(in,cond)
+function [avglost3,semlost3,avglost1,semlost1,avgnew3,semnew3,avgnew1,semnew1] = plotWKrates_cuprL1vL3(in,cond)
 condEnd = 10;
 [c1, c2] = getFigColors;
 if contains(cond,'ctrl')

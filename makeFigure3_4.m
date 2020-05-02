@@ -1,23 +1,27 @@
-function [distStats,ctrlTerrPs,ctrlTerrStats,cuprTerrPs,cuprTerrStats] = makeFigure3(showplots,showstats,ctrlAvg,cuprAvg)
-% MAKEFIGURE3 Creates graphs and numerical data for JOM & CLC et al Figure 2
+function [distStats,ctrlTerrPs,ctrlTerrStats,cuprTerrPs,cuprTerrStats] = makeFigure3_4(showplots,showstats,ctrlAvg,cuprAvg)
+% MAKEFIGURE3_4 Creates graphs and numerical data for JOM & CLC et al Figure
+% 3, 4
 % REQUIRES RUNNING SingleOLAnalysis FIRST IF ALL_########.mat DOES NOT
 %   EXIST
-% All panels for Figure 3 and associated Supplemental Figure are generated
+% Additional panels for Figure 3, 4 and associated Supplemental Figure are generated
 %   within SingleOLAnalysis
-% Generates panels a,b,c,D?,h,i,j,k,l and associated numerical data
 % inputs:
 %   showplots = 1 to generate data graphs, else 0
 %   showstats = 1 to generate multcompare figs, else 0
 %   include ctrlAvg, cuprAvg if already generated
-if ispc
-    slash = '\';
-else
-    slash = '/';
+[~,name] = fileparts(pwd);
+if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife')
+    cd('..');
+    [~,name] = fileparts(pwd);
+    if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife')
+        error(['Change current folder to ' name])
+    end
 end
-addpath(['.' slash 'FinalDataStructs']);
-addpath(genpath(['.' slash 'MATLAB_code']));
+addpath('.');
+addpath(fullfile('.','FinalDataStructs'));
+addpath(genpath(fullfile('.','MATLAB_code')));
 if nargin==2
-    cd(['FinalDataStructs' slash]);
+    cd('FinalDataStructs');
     load('cupr_notAveraged.mat', 'cupr');
     cuprAvg = averageQuads(cupr);
     cuprAvg = averageConds(cuprAvg);

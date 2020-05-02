@@ -1,10 +1,13 @@
+function [terrData, terrStats] = plotTerrRadii(ALL)
 [c1,c2] = getFigColors;
 coloridx = {[0.5 0.5 0.5],c1,c2 [0.5 0.5 0.5],c1,c2};
 bsln = ALL.stats.terrRadii.bsln; 
 ctrl = ALL.stats.terrRadii.ctrl; 
 cupr = ALL.stats.terrRadii.cupr;
 avg = [mean(bsln,1); mean(ctrl,1); mean(cupr,1)];
+terrData.avgs = avg;
 sem = [calcSEM(bsln); calcSEM(ctrl); calcSEM(cupr)];
+terrData.sems = sem;
 [bsln,ctrl] = forceConcat(bsln,ctrl,1);
 [ctrl,cupr] = forceConcat(ctrl,cupr,1);
 data = [bsln(:);ctrl(:);cupr(:)];
@@ -25,6 +28,6 @@ figQuality(gcf,gca,[3.1 2.4])
 %%
 data = [bsln(:,1);ctrl(:,1);cupr(:,1)];
 group = [ones(size(bsln,1),1); 2.*ones(size(ctrl,1),1); 3.*ones(size(cupr,1),1)];
-[p,~,stats] = anova1(data,group);
+[terrStats.p,terrStats.tbl,terrStats.stats] = anova1(data,group);
 figure
-multcompare(stats);
+terrStats.multComp = multcompare(terrStats.stats,'CType','hsd');

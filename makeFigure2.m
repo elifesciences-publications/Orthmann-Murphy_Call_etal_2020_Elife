@@ -12,17 +12,18 @@ else
     slash = '/';
 end
 [~,name] = fileparts(pwd);
-if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
-    cd(['..' slash]);
+if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
+    cd('..');
     [~,name] = fileparts(pwd);
-    if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
+    if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
         error(['Change current folder to ' name])
     end
 end
-addpath(['.' slash 'FinalDataStructs']);
-addpath(genpath(['.' slash 'MATLAB_code']));
+addpath('.');
+addpath(fullfile('.','FinalDataStructs'));
+addpath(genpath(fullfile('.','MATLAB_code')));
 if nargin<4
-    cd(['FinalDataStructs' slash]);
+    cd('FinalDataStructs');
     load('cupr_notAveraged.mat', 'cupr');
     cuprAvg = averageQuads(cupr);
     cuprAvg = averageConds(cuprAvg);
@@ -35,8 +36,8 @@ end
 if showplots
     [ctrldata.avgDeath,ctrldata.semDeath,ctrldata.avgNew,ctrldata.semNew] = plotByBin(ctrlAvg,'ctrl');
     [cuprdata.avgDeath,cuprdata.semDeath,cuprdata.avgNew,cuprdata.semNew] = plotByBin(cuprAvg,'cupr');
-    [ctrldata.avglost3,ctrldata.semlost3,ctrldata.avglost1,ctrldata.semlost1] = plotWKrates_cuprL1vL3(ctrlAvg,'ctrl');
-    [cuprdata.avglost3,cuprdata.semlost3,cuprdata.avglost1,cuprdata.semlost1] = plotWKrates_cuprL1vL3(cuprAvg,'cupr');
+    [ctrldata.avglost3,ctrldata.semlost3,ctrldata.avglost1,ctrldata.semlost1,ctrldata.avgnew3,ctrldata.semnew3,ctrldata.avgnew1,ctrldata.semnew1] = plotWKrates_cuprL1vL3(ctrlAvg,'ctrl');
+    [cuprdata.avglost3,cuprdata.semlost3,cuprdata.avglost1,cuprdata.semlost1,cuprdata.avgnew3,cuprdata.semnew3,cuprdata.avgnew1,cuprdata.semnew1] = plotWKrates_cuprL1vL3(cuprAvg,'cupr');
     [cuprdata.rawavg1,cuprdata.rawsem1,cuprdata.rawavg2,cuprdata.rawsem2,cuprdata.rawavg3,cuprdata.rawsem3,cuprdata.rawanovan] = plotRawCellNumberPerBin(cuprAvg,showstats);
     depthData = Fig2_NewCellDistrPlotsHistos_all(cuprAvg,showquadplots); %used r033 in fig
 end

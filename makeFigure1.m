@@ -2,34 +2,24 @@ function [Fig1hi_datatable, Fig1jk_datatable, stats, ctrlAvg, cuprAvg] = makeFig
 %  MAKEFIGURE1 Creates graphs and numerical data for JOM & CLC et al Figure 1.
 % 
 % Generates Fig 1 panels h, i, j, k and associated numerical data
-% 
 % inputs:
-% 
 % ctrlAvg: optional if already generated from running code once
-% 
 % cuprAvg: as above
-% 
 % showplots = 1 to generate data graphs, else 0
-% 
 % showstats = 1 to generate multcompare figs, else 0
-if ispc
-    slash = '\';
-else
-    slash = '/';
-end
 [~,name] = fileparts(pwd);
-if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
-    cd(['..' slash]);
+if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
+    cd('..');
     [~,name] = fileparts(pwd);
-    if ~contains(name,'Remyelination Manuscript Code Jan 2020') 
+    if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
         error(['Change current folder to ' name])
     end
 end
-addpath(['.' slash]);
-addpath(['.' slash 'FinalDataStructs']);
-addpath(genpath(['.' slash 'MATLAB_code']));
+addpath('.');
+addpath(fullfile('.','FinalDataStructs'));
+addpath(genpath(fullfile('.','MATLAB_code')));
 if nargin==2
-    cd(['FinalDataStructs' slash]);
+    cd('FinalDataStructs');
     load('cupr_notAveraged.mat', 'cupr');
     cuprAvg = averageQuads(cupr);
     cuprAvg = averageConds(cuprAvg);
@@ -68,13 +58,8 @@ Fig1jk_datatable = table(lossrates_ctl, newrates_ctl, lossrates_cup, newrates_cu
 %% ctrl vs cupr loss/new stats for recovery time points
 stats = struct;
 for type = 2:3 %2 = loss rate; 3 = new rate
-    %     if type==2
     start = 2;
     n = 9;
-    %     else
-    %         start = 5;
-    %         n = 5;
-    %     end
     Mctrl = [];
     Mcupr = [];
     ctrfields = fieldnames(ctrlAvg);
