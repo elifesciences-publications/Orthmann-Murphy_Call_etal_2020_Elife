@@ -1,6 +1,6 @@
 function [ng2_dataC, ng2table, ng2_ratios, ng2stats, gfap_dataC, gfaptable, gfap_ratios, gfapstats] = makeSupplFigure4(showplots,showstats)
-%  MAKESUPPLFIGURE1 Creates graphs and numerical data for JOM & CLC et al Supplemental Figure 
-% 1
+%  MAKESUPPLFIGURE4 Creates graphs and numerical data for JOM & CLC et al Supplemental Figure 
+% 4
 % 
 % Generates data panels (ng2 and gfap counts by depth 0-500 um) and associated 
 % numerical data
