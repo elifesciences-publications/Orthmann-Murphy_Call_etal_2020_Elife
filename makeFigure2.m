@@ -6,11 +6,6 @@ function [stats,ctrldata,cuprdata,depthData,ctrlAvg,cuprAvg] = makeFigure2(showp
 % showquadplots = 1 to generate timepoint plots for all quads analyzed,
 % else 0
 % showstats = 1 to generate multcompare figs, else 0
-if ispc
-    slash = '\';
-else
-    slash = '/';
-end
 [~,name] = fileparts(pwd);
 if ~contains(name,'Orthmann-Murphy_Call_etal_2020_Elife') 
     cd('..');

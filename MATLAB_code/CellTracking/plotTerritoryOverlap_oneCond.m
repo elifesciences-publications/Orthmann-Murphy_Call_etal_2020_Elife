@@ -11,7 +11,7 @@ end
 in1Data = in1.avg.volOverlapPerAn(:,2) .* (bslnCellNumPerAn.in1' ./ in1.avg.volOverlapPerAn(:,1));
 in1RanData = in1.avg.volOverlapRandPerAn(:,2) .* (bslnCellNumPerAn.in1' ./ in1.avg.volOverlapRandPerAn(:,1));
 groups = [repmat('real',size(in1Data)); repmat('rand',size(in1RanData))];
-[terrPs.ReplVolp,~,terrStats.ReplVol] = anova1([in1Data;in1RanData],groups);
+[terrPs.ReplVolp,terrStats.replTbl,terrStats.ReplVol] = anova1([in1Data;in1RanData],groups);
 l = length(in1Data);
 idx = [ones(l,1); ones(l,1).*2];
 avg = [mean(in1Data,'omitnan');mean(in1RanData,'omitnan')];
@@ -32,7 +32,7 @@ figQuality(gcf,gca,[1 1.8])
 in1Data = in1.avg.volOverlapPerAn(:,4) .* (bslnCellNumPerAn.in1' ./ in1.avg.volOverlapPerAn(:,1));
 in1RanData = in1.avg.volOverlapRandPerAn(:,4) .* (bslnCellNumPerAn.in1' ./ in1.avg.volOverlapRandPerAn(:,1));
 groups = [repmat('real',size(in1Data)); repmat('rand',size(in1RanData))];
-[terrPs.novlVolp,~,terrStats.novlVol] = anova1([in1Data;in1RanData],groups);
+[terrPs.novlVolp,terrStats.novltbl,terrStats.novlVol] = anova1([in1Data;in1RanData],groups);
 l = length(in1Data);
 idx = [ones(l,1); ones(l,1).*2];
 avg = [mean(in1Data,'omitnan');mean(in1RanData,'omitnan')];

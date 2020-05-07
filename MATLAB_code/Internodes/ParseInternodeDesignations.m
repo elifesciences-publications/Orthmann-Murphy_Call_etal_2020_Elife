@@ -1,7 +1,7 @@
 % edited CLC 20180427
 function ParseInternodeDesignations(directory,cond)
 %     type = input('Enter ctrl OR cupr\n','s');
-    directory = [directory cond slash];
+    directory = fullfile(directory, cond);
     addpath(genpath(directory));
     contents = dir(directory);
     contents(1:2) = [];

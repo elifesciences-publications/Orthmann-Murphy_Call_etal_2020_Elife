@@ -34,7 +34,7 @@ figQuality(gcf,gca,[3.1 2.4])
 [~,stats.anovatbl,stats.anovastats] = anova1(data,idx);
 if showstats
     figure
-    multcompare(stats.anovastats);
+    stats.multcompstats = multcompare(stats.anovastats,'CType','bonferroni');
 end
 [~,pStbl300,~,stats.Stbl300_Tstats] = ttest2(ctrlData(:,1),cuprData(:,1));
 [~,pAll300,~,stats.All300_Tstats] = ttest2(ctrlData(:,2),cuprData(:,2));

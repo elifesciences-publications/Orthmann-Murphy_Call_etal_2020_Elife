@@ -33,7 +33,7 @@ for i = 1:length(files)
         subplot(2,1,1)
         plotVolumes(an,sheathIndex,xmlstruct,fldr)
         hold on
-        [optRadxy, optRadz, coords] = territoryAlgorithm(sheathIndex,xmlstruct,an);
+        [optRadxy, optRadz, coords] = territoryAlgorithm(sheathIndex,xmlstruct);
         Compiled_Data(:).(var_name).sheathCoords = deal(coords);
         [x, y, z] = ellipsoid(0,0,0,optRadxy,optRadxy,optRadz,40);
         surf(x, y, z,'FaceColor','k','FaceAlpha',0.2,'EdgeColor','none')

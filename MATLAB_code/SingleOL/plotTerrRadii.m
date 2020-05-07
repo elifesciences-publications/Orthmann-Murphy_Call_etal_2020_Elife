@@ -25,9 +25,9 @@ xticklabels({})
 hold off
 figQuality(gcf,gca,[3.1 2.4])
 
-%%
 data = [bsln(:,1);ctrl(:,1);cupr(:,1)];
 group = [ones(size(bsln,1),1); 2.*ones(size(ctrl,1),1); 3.*ones(size(cupr,1),1)];
 [terrStats.p,terrStats.tbl,terrStats.stats] = anova1(data,group);
 figure
 terrStats.multComp = multcompare(terrStats.stats,'CType','hsd');
+end

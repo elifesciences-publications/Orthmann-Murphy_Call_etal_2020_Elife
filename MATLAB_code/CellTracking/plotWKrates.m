@@ -2,7 +2,7 @@ function plotWKrates(ctrl,cupr,intrv)
 ctlEnd = 10;
 cupEnd = 10;
 intEnd = 9;
-[c1, c2, c3, c4] = getFigColors;
+[c1, c2] = getFigColors;
 figure
 title('lost rate')
 avglostcupr = [0;cupr.avg.WKdataProp(2:cupEnd,2).*-1];

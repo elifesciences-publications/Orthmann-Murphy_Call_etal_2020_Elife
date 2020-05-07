@@ -1,7 +1,7 @@
 % edited CLC 20180427
-function compiledIntData = compileROIs_ver2(type,slash)
+function compiledIntData = compileROIs_ver2(type)
 %     type = input('Enter ctrl OR cupr\n','s');
-    directory = ['.' slash 'InternodeAnalysis_Round2' slash type slash];
+    directory = fullfile('.','InternodeAnalysis_Round2',type);
     addpath(genpath(directory));
     contents = dir(directory);
     contents(1:2) = [];
@@ -10,6 +10,11 @@ function compiledIntData = compileROIs_ver2(type,slash)
     compiledIntData = struct;
     for f = 1:length(folders)
         anFolder = fullfile(directory, folders(f).name);
+        if ispc
+            slash = '\';
+        else
+            slash = '/';
+        end
         anName = strsplit(anFolder,slash);
         anName = anName{end};
         compiledIntData.(anName) = struct;
